@@ -1,3 +1,10 @@
+/*
+ * lazyMan的几个关键点
+ * 1.实现链式调用(执行每个函数时返回this，通过this来调用下一个函数)
+ * 2.在链式执行函数时通过即时函数形成的闭包把每个函数的任务返回回来，然后push进任务栈
+ * 3.sleep和sleepFirst都是通过返回一个定时函数(延迟任务栈中的下一个任务执行)
+ *   只不过sleepFirst在将这个任务push进任务栈的时候，插了一个队，直接插到队首去了
+ */
 function _lazyMan (name) {
   var self = this
   self.task = []
