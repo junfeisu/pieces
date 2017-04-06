@@ -11,6 +11,10 @@ function isStaictObject (obj) {
 }
 
 function deepCopy (source, dest) {
+  if (!isArray(source) && !isStaictObject(source)) {
+    throw 'the source you support can not be copied'
+  }
+
   var copySource = isArray(source) ? [] : {}
   for (var prop in source) {
     if (source.hasOwnProperty(prop)) {
@@ -36,7 +40,7 @@ var testObj = {
   arr: [1, 2, [3, 4]]
 }
 
-var copyObj = deepCopy(testObj)
+var copyObj = deepCopy('123')
 copyObj.name = 'jinjingjing'
 copyObj.obj.attr = '234'
 copyObj.arr[2] = 3
