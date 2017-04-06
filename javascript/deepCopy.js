@@ -14,30 +14,26 @@ function isStaictObject (obj) {
   return judgeType(obj) === '[object Object]'
 }
 
-function deepCopy (source, dest, sourceStack, destStack) {
+function deepCopy (source, dest) {
   if (!dest) {
     dest = source
     if (isArray(source)) {
-      dest = deepCopy(source, [], sourceStack, destStack)
+      dest = deepCopy(source, [])
     } else if (isStaictObject(source)) {
-      dest = deepCopy(source, {}, sourceStack, destStack)
+      dest = deepCopy(source, {})
     }
-    console.log('dest is ' + JSON.stringify(dest))
   } else {
-    sourceStack = sourceStack || []
-    destStack = destStack || []
-
     var result
     if (isArray(source)) {
       dest.length = 0;
       for (var i = 0; i < source.length; i++) {
-        result = deepCopy(source[i], null, sourceStack, destStack)
+        result = deepCopy(source[i], null)
         dest.push(result)
       }
     } else {
       for (var prop in source) {
         if (source.hasOwnProperty(prop)) {
-          result = deepCopy(source[prop], null, sourceStack, destStack)
+          result = deepCopy(source[prop], null)
           dest[prop] = result
         }
       }
